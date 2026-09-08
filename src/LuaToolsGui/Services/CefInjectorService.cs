@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using System.Net.Http;
 using System.Net.WebSockets;
 using System.Text;
@@ -64,7 +64,7 @@ public class CefInjectorService : IHostedService
     {
         var ct = _cts?.Token ?? CancellationToken.None;
 
-        var jsPath = FindLuaToolsJs();
+        var jsPath = FindGalapaSteamJs();
         if (jsPath is not null && File.Exists(jsPath))
         {
             _luatoolsJs = await File.ReadAllTextAsync(jsPath, ct);
@@ -218,18 +218,24 @@ public class CefInjectorService : IHostedService
     {
         var methodMap = new Dictionary<string, (string HttpMethod, string Path)>
         {
+            // ── Add flow (original + renamed) ──
             ["HasLuaToolsForApp"] = ("GET", "/has/{appid}"),
+            ["HasGalapaSteamForApp"] = ("GET", "/has/{appid}"),
             ["CheckApisForApp"] = ("POST", "/check-sources/{appid}"),
             ["StartAddViaLuaToolsFromUrl"] = ("POST", "/download/{appid}"),
             ["GetAddViaLuaToolsStatus"] = ("GET", "/download-status/{appid}"),
             ["CancelAddViaLuaTools"] = ("POST", "/cancel/{appid}"),
+            ["CancelAddViaGalapaSteam"] = ("POST", "/cancel/{appid}"),
             ["DeleteLuaToolsForApp"] = ("POST", "/remove/{appid}"),
             // Store-page popup's self-contained add pipeline (PluginAddService-backed).
             // Raw fetch() to these from the page context is blocked as mixed content
             // (HTTPS store page -> HTTP localhost); route through this CDP bridge instead.
             ["StartLuaToolsAdd"] = ("POST", "/add/{appid}"),
+            ["StartGalapaSteamAdd"] = ("POST", "/add/{appid}"),
             ["GetLuaToolsAddStatus"] = ("GET", "/add-status/{appid}"),
+            ["GetGalapaSteamAddStatus"] = ("GET", "/add-status/{appid}"),
             ["PickLuaToolsAddSource"] = ("POST", "/add-source/{appid}"),
+            ["PickGalapaSteamAddSource"] = ("POST", "/add-source/{appid}"),
             // Menu actions (Settings, Fixes, Restart Steam). Same mixed-content problem, same fix.
             ["OpenSettings"] = ("POST", "/open/settings"),
             ["OpenFix"] = ("POST", "/open/fix/{appid}"),
@@ -244,8 +250,21 @@ public class CefInjectorService : IHostedService
             ["GetApiList"] = ("GET", "/api-list"),
             ["GetIconDataUrl"] = ("GET", "/icon"),
             ["GetGamesDatabase"] = ("GET", "/games-database"),
+            ["CheckLicense"] = ("POST", "/check-license"),
             ["Logger"] = ("POST", "/log"),
+            ["Logger.log"] = ("POST", "/log"),
         };
+
+        // Plugin features that have no backend handler yet — return benign defaults so the
+        // frontend doesn't hang waiting for a response that will never arrive.
+        var noopMethods = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+        {
+            "CheckForFixes", "GetThemes", "GetSettingsConfig",
+            "GetTranslations", "GetInitApisMessage",
+        };
+
+        if (noopMethods.Contains(method))
+            return """{"success":true,"data":{}}""";
 
         if (!methodMap.TryGetValue(method, out var mapping))
             return """{"success":true}""";
@@ -370,15 +389,15 @@ public class CefInjectorService : IHostedService
         await EvaluateReturnAsync(tabId, wsUrl, script, ct);
     }
 
-    private string? FindLuaToolsJs()
+    private string? FindGalapaSteamJs()
     {
         string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         // The frontend is no longer bundled with the app. PluginInstallerService downloads it from
         // GitHub releases into %AppData%\LuaToolsGui\plugin. If it isn't installed yet, nothing injects.
         string[] candidates =
         {
-            Path.Combine(appData, "LuaToolsGui", "plugin", "public", "luatools.js"),
-            Path.Combine(appData, "LuaToolsGui", "plugin", "luatools.js"),
+            Path.Combine(appData, "LuaToolsGui", "plugin", "public", "galapasteam.js"),
+            Path.Combine(appData, "LuaToolsGui", "plugin", "galapasteam.js"),
         };
         foreach (var path in candidates)
             if (File.Exists(path)) return path;
@@ -427,7 +446,7 @@ function ltCall(p,m,a){
 }
 if(real&&typeof real.callServerMethod==='function'){
   var realCall=real.callServerMethod.bind(real);
-  real.callServerMethod=function(p,m,a){return p==='luatools'?ltCall(p,m,a):realCall(p,m,a)};
+  real.callServerMethod=function(p,m,a){return p==='galapasteam'?ltCall(p,m,a):realCall(p,m,a)};
   real._pending=pending;
   real._readyResponses=ready;
   window.Millennium=real;

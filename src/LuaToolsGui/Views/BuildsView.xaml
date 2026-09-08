@@ -104,7 +104,7 @@
                             </Grid.ColumnDefinitions>
                             <TextBlock
                                 FontSize="12.5"
-                                Foreground="#e5e7eb"
+                                Foreground="#1C1A17"
                                 Text="{Binding Title}"
                                 TextTrimming="CharacterEllipsis" />
                             <Border
@@ -112,7 +112,7 @@
                                 Margin="6,0,0,0"
                                 Padding="5,1"
                                 VerticalAlignment="Center"
-                                Background="#2a2440"
+                                Background="#EDE6DA"
                                 CornerRadius="4"
                                 Visibility="{Binding IsDlc, Converter={StaticResource BoolToVis}}">
                                 <TextBlock
@@ -126,7 +126,7 @@
                                 Margin="6,0,0,0"
                                 Padding="5,1"
                                 VerticalAlignment="Center"
-                                Background="#3a3320"
+                                Background="#EDE6DA"
                                 CornerRadius="4"
                                 Visibility="{Binding IsShared, Converter={StaticResource BoolToVis}}">
                                 <TextBlock
@@ -139,7 +139,7 @@
                         <TextBlock
                             Margin="0,1,0,0"
                             FontSize="10.5"
-                            Foreground="#6b7280"
+                            Foreground="#6B6560"
                             Text="{Binding Meta}" />
                         <TextBlock
                             Margin="0,2,0,0"
@@ -199,7 +199,7 @@
                 <Border
                     Width="46"
                     Height="22"
-                    Background="#11FFFFFF"
+                    Background="#112D2A26"
                     ClipToBounds="True"
                     CornerRadius="3">
                     <Image Source="{Binding Cover}" Stretch="UniformToFill" />
@@ -234,7 +234,7 @@
                         TextTrimming="CharacterEllipsis" />
                     <TextBlock
                         FontSize="10.5"
-                        Foreground="#6b7280"
+                        Foreground="#6B6560"
                         Text="{Binding Meta}"
                         TextTrimming="CharacterEllipsis" />
                 </StackPanel>
@@ -276,7 +276,7 @@
                 <TextBlock
                     Margin="0,2,0,0"
                     FontSize="11.5"
-                    Foreground="#9ca3af"
+                    Foreground="#4A4540"
                     Text="{x:Static res:Strings.Builds_Subtitle}"
                     TextWrapping="Wrap" />
             </StackPanel>
@@ -338,8 +338,8 @@
             <!-- ── Left: game picker ────────────────────────────────── -->
             <Border
                 Padding="10"
-                Background="#0DFFFFFF"
-                BorderBrush="#1FFFFFFF"
+                Background="#0D2D2A26"
+                BorderBrush="#2D2A2633"
                 BorderThickness="1"
                 CornerRadius="8">
                 <Grid>
@@ -358,7 +358,7 @@
                         Margin="4,16,4,0"
                         VerticalAlignment="Top"
                         FontSize="11.5"
-                        Foreground="#6b7280"
+                        Foreground="#6B6560"
                         Text="{Binding EmptyMessage}"
                         TextWrapping="Wrap"
                         Visibility="{Binding IsEmpty, Converter={StaticResource BoolToVis}}" />
@@ -397,7 +397,7 @@
                                 Margin="6,0"
                                 VerticalAlignment="Center"
                                 FontSize="11.5"
-                                Foreground="#9ca3af"
+                                Foreground="#4A4540"
                                 Text="{Binding PageLabel}"
                                 TextAlignment="Center" />
                             <ui:Button
@@ -415,7 +415,7 @@
                                 Margin="0,0,6,0"
                                 VerticalAlignment="Center"
                                 FontSize="11"
-                                Foreground="#6b7280"
+                                Foreground="#6B6560"
                                 Text="{x:Static res:Strings.Manage_ResultsPerPage}" />
                             <ComboBox
                                 MinWidth="66"
@@ -437,13 +437,13 @@
                     <ui:SymbolIcon
                         HorizontalAlignment="Center"
                         FontSize="42"
-                        Foreground="#4b5563"
+                        Foreground="#4A4540"
                         Symbol="BranchFork24" />
                     <TextBlock
                         Margin="0,10,0,0"
                         HorizontalAlignment="Center"
                         FontSize="13"
-                        Foreground="#6b7280"
+                        Foreground="#6B6560"
                         Text="{x:Static res:Strings.Builds_NoSelection}"
                         TextWrapping="Wrap" />
                 </StackPanel>
@@ -467,7 +467,7 @@
                         <TextBlock
                             Margin="0,2,0,0"
                             FontSize="11.5"
-                            Foreground="#9ca3af"
+                            Foreground="#4A4540"
                             Text="{Binding AppId, StringFormat={x:Static res:Strings.Common_AppId}}" />
                     </StackPanel>
                     <TextBlock
@@ -475,7 +475,7 @@
                         HorizontalAlignment="Right"
                         VerticalAlignment="Top"
                         FontSize="11.5"
-                        Foreground="#6b7280"
+                        Foreground="#6B6560"
                         Text="{Binding LatestBuildLabel}"
                         Visibility="{Binding LatestBuildLabel, Converter={StaticResource NullToCollapsed}}" />
 
@@ -484,15 +484,15 @@
                         Grid.Row="1"
                         Margin="0,12,0,0"
                         Padding="12"
-                        Background="#0DFFFFFF"
-                        BorderBrush="#1FFFFFFF"
+                        Background="#0D2D2A26"
+                        BorderBrush="#2D2A2633"
                         BorderThickness="1"
                         CornerRadius="8">
                         <StackPanel>
                             <TextBlock
                                 FontSize="12"
                                 FontWeight="SemiBold"
-                                Foreground="#d1d5db"
+                                Foreground="#1C1A17"
                                 Text="{x:Static res:Strings.Builds_ActiveBuild}" />
 
                             <ComboBox
@@ -591,7 +591,7 @@
                         <TextBlock
                             FontSize="12"
                             FontWeight="SemiBold"
-                            Foreground="#d1d5db"
+                            Foreground="#1C1A17"
                             Text="{x:Static res:Strings.Builds_Editor_Title}" />
                         <TextBox
                             Grid.Row="1"
@@ -649,7 +649,7 @@
                             Margin="2,12,0,0"
                             VerticalAlignment="Top"
                             FontSize="11.5"
-                            Foreground="#6b7280"
+                            Foreground="#6B6560"
                             Text="{x:Static res:Strings.Builds_Depot_NoMatch}"
                             TextWrapping="Wrap"
                             Visibility="{Binding HasNoDepotMatches, Converter={StaticResource BoolToVis}}" />
@@ -674,7 +674,7 @@
                                     Margin="8,0,0,0"
                                     VerticalAlignment="Center"
                                     FontSize="12"
-                                    Foreground="#9ca3af"
+                                    Foreground="#4A4540"
                                     Text="{x:Static res:Strings.Manage_LoadingDepotInfo}" />
                             </StackPanel>
                             <TextBlock
@@ -706,9 +706,9 @@
                                     <TextBlock
                                         FontSize="13"
                                         FontWeight="SemiBold"
-                                        Foreground="#d1d5db">
+                                        Foreground="#1C1A17">
                                         <Run Text="{Binding InLuaToggleLabel, Mode=OneWay}" />
-                                        <Run Foreground="#6b7280" Text="{Binding InLuaCount, StringFormat='({0})', Mode=OneWay}" />
+                                        <Run Foreground="#6B6560" Text="{Binding InLuaCount, StringFormat='({0})', Mode=OneWay}" />
                                     </TextBlock>
                                 </Button>
                                 <ItemsControl
@@ -732,14 +732,14 @@
                                         FontWeight="SemiBold"
                                         Foreground="#f0a868">
                                         <Run Text="{Binding MissingToggleLabel, Mode=OneWay}" />
-                                        <Run Foreground="#6b7280" Text="{Binding MissingCount, StringFormat='({0})', Mode=OneWay}" />
+                                        <Run Foreground="#6B6560" Text="{Binding MissingCount, StringFormat='({0})', Mode=OneWay}" />
                                     </TextBlock>
                                 </Button>
                                 <StackPanel Visibility="{Binding IsMissingExpanded, Converter={StaticResource BoolToVis}}">
                                     <TextBlock
                                         Margin="0,2,0,0"
                                         FontSize="10.5"
-                                        Foreground="#6b7280"
+                                        Foreground="#6B6560"
                                         Text="{x:Static res:Strings.Manage_MissingHint}"
                                         TextWrapping="Wrap" />
                                     <ItemsControl
@@ -761,16 +761,16 @@
                                     <TextBlock
                                         FontSize="13"
                                         FontWeight="SemiBold"
-                                        Foreground="#9ca3af">
+                                        Foreground="#4A4540">
                                         <Run Text="{Binding UnknownToggleLabel, Mode=OneWay}" />
-                                        <Run Foreground="#6b7280" Text="{Binding UnknownCount, StringFormat='({0})', Mode=OneWay}" />
+                                        <Run Foreground="#6B6560" Text="{Binding UnknownCount, StringFormat='({0})', Mode=OneWay}" />
                                     </TextBlock>
                                 </Button>
                                 <StackPanel Visibility="{Binding IsUnknownExpanded, Converter={StaticResource BoolToVis}}">
                                     <TextBlock
                                         Margin="0,2,0,0"
                                         FontSize="10.5"
-                                        Foreground="#6b7280"
+                                        Foreground="#6B6560"
                                         Text="{x:Static res:Strings.Manage_UnknownHint}"
                                         TextWrapping="Wrap" />
                                     <ItemsControl
@@ -845,7 +845,7 @@
                                                                 Margin="6,0,0,0"
                                                                 Padding="5,1"
                                                                 VerticalAlignment="Center"
-                                                                Background="#2a2440"
+                                                                Background="#EDE6DA"
                                                                 CornerRadius="4"
                                                                 Visibility="{Binding IsDlc, Converter={StaticResource BoolToVis}}">
                                                                 <TextBlock
@@ -859,7 +859,7 @@
                                                                 Margin="6,0,0,0"
                                                                 Padding="5,1"
                                                                 VerticalAlignment="Center"
-                                                                Background="#3a3320"
+                                                                Background="#EDE6DA"
                                                                 CornerRadius="4"
                                                                 Visibility="{Binding IsShared, Converter={StaticResource BoolToVis}}">
                                                                 <TextBlock
@@ -871,7 +871,7 @@
                                                         </Grid>
                                                         <TextBlock
                                                             FontSize="11"
-                                                            Foreground="#6b7280"
+                                                            Foreground="#6B6560"
                                                             Text="{Binding Meta}" />
                                                         <!--  Says why a tickable row starts unticked. Both
                                                               are downloadable, just not by default: shared
@@ -880,7 +880,7 @@
                                                         <TextBlock
                                                             Margin="0,2,0,0"
                                                             FontSize="10.5"
-                                                            Foreground="#6b7280"
+                                                            Foreground="#6B6560"
                                                             Text="{x:Static res:Strings.Builds_Select_SharedHint}"
                                                             TextWrapping="Wrap"
                                                             Visibility="{Binding IsShared, Converter={StaticResource BoolToVis}}" />
@@ -911,7 +911,7 @@
                                 <TextBlock
                                     VerticalAlignment="Center"
                                     FontSize="11.5"
-                                    Foreground="#6b7280"
+                                    Foreground="#6B6560"
                                     Text="{x:Static res:Strings.Builds_Select_SaveTo}" />
                                 <TextBlock
                                     MaxWidth="420"
@@ -959,7 +959,7 @@
                                     Margin="0,0,10,0"
                                     VerticalAlignment="Center"
                                     FontSize="11.5"
-                                    Foreground="#6b7280"
+                                    Foreground="#6B6560"
                                     Text="{x:Static res:Strings.Builds_Select_None}"
                                     Visibility="{Binding HasDepotSelection, Converter={StaticResource InverseBoolToVis}}" />
                                 <ui:Button

@@ -1,4 +1,4 @@
-using System.Globalization;
+﻿using System.Globalization;
 using System.IO;
 using System.Text.Json;
 using System.Threading;
@@ -23,6 +23,10 @@ public static class Program
 
         // Register the luatools:// protocol handler so browser links can open the app.
         Services.ProtocolService.Register();
+
+        // Deploy the LuaTools.exe launcher stub to %LOCALAPPDATA%\LuaTools\current\ so the
+        // winmm.dll proxy (Rust binary, hardcoded path) can find and launch the app.
+        DeployLauncherStub();
 
         // Check if we were launched with a luatools:// protocol URL.
         string? protocolUrl = null;
@@ -267,5 +271,32 @@ public static class Program
         }
         catch { /* corrupt/missing → fall back to OS */ }
         return null;
+    }
+
+    /// <summary>
+    /// The winmm.dll proxy (compiled Rust binary) hardcodes the launch path
+    /// %LOCALAPPDATA%\LuaTools\current\LuaTools.exe. Since our real exe lives
+    /// at %LOCALAPPDATA%\GalapaSteam\current\GalapaSteam.exe, we deploy a
+    /// small launcher stub to the old path on first run so the DLL can find it.
+    /// </summary>
+    private static void DeployLauncherStub()
+    {
+        try
+        {
+            string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            string targetDir = Path.Combine(localAppData, "LuaTools", "current");
+            string targetExe = Path.Combine(targetDir, "LuaTools.exe");
+
+            string sourceExe = Path.Combine(AppContext.BaseDirectory, "LuaTools.exe");
+            if (!File.Exists(sourceExe)) return;
+
+            Directory.CreateDirectory(targetDir);
+            File.Copy(sourceExe, targetExe, overwrite: true);
+
+            string sourceDll = Path.Combine(AppContext.BaseDirectory, "LuaTools.dll");
+            if (File.Exists(sourceDll))
+                File.Copy(sourceDll, Path.Combine(targetDir, "LuaTools.dll"), overwrite: true);
+        }
+        catch { /* best effort */ }
     }
 }

@@ -40,13 +40,13 @@
                                 <StackPanel>
                                     <TextBlock
                                         FontSize="12.5"
-                                        Foreground="#e5e7eb"
+                                        Foreground="#1C1A17"
                                         Text="{Binding Title}"
                                         TextTrimming="CharacterEllipsis" />
                                     <TextBlock
                                         Margin="0,1,0,0"
                                         FontSize="10.5"
-                                        Foreground="#6b7280"
+                                        Foreground="#6B6560"
                                         Text="{Binding Meta}" />
                                 </StackPanel>
                                 <Border
@@ -54,7 +54,7 @@
                                     Margin="8,1,0,0"
                                     Padding="5,1"
                                     VerticalAlignment="Top"
-                                    Background="#2a2440"
+                                    Background="#EDE6DA"
                                     CornerRadius="4"
                                     Visibility="{Binding IsDlc, Converter={StaticResource BoolToVis}}">
                                     <TextBlock
@@ -68,7 +68,7 @@
                                     Margin="8,1,0,0"
                                     Padding="5,1"
                                     VerticalAlignment="Top"
-                                    Background="#3a3320"
+                                    Background="#EDE6DA"
                                     CornerRadius="4"
                                     Visibility="{Binding IsShared, Converter={StaticResource BoolToVis}}">
                                     <TextBlock
@@ -106,8 +106,8 @@
                     <ControlTemplate TargetType="Button">
                         <Border
                             x:Name="Bd"
-                            Background="#0DFFFFFF"
-                            BorderBrush="#14FFFFFF"
+                            Background="#0D2D2A26"
+                            BorderBrush="#1E2D2A26"
                             BorderThickness="1"
                             CornerRadius="8">
                             <StackPanel>
@@ -121,7 +121,7 @@
                                     Height="34"
                                     Margin="8,6,8,8"
                                     FontSize="12"
-                                    Foreground="#d1d5db"
+                                    Foreground="#1C1A17"
                                     Text="{Binding Name}"
                                     TextTrimming="CharacterEllipsis"
                                     TextWrapping="Wrap" />
@@ -150,7 +150,7 @@
             <TextBlock
                 Margin="0,4,0,16"
                 FontSize="13"
-                Foreground="#9ca3af"
+                Foreground="#4A4540"
                 Text="{x:Static res:Strings.Add_Subtitle}" />
 
             <!-- Search -->
@@ -162,8 +162,8 @@
             <!-- Autocomplete results -->
             <Border
                 Margin="0,6,0,0"
-                Background="#14141c"
-                BorderBrush="#14FFFFFF"
+                Background="#FFFDF8"
+                BorderBrush="#1E2D2A26"
                 BorderThickness="1"
                 CornerRadius="10"
                 Visibility="{Binding IsResultsOpen, Converter={StaticResource BoolToVis}}">
@@ -203,7 +203,7 @@
                                         Grid.Column="2"
                                         VerticalAlignment="Center"
                                         FontSize="11.5"
-                                        Foreground="#6b7280"
+                                        Foreground="#6B6560"
                                         Text="{Binding AppId}" />
                                 </Grid>
                             </Button>
@@ -223,7 +223,7 @@
                     <TextBlock
                         FontSize="13"
                         FontWeight="SemiBold"
-                        Foreground="#d1d5db"
+                        Foreground="#1C1A17"
                         Text="{x:Static res:Strings.Add_Featured_TopSellers}" />
                     <ScrollViewer
                         Margin="0,8,0,0"
@@ -249,7 +249,7 @@
                     <TextBlock
                         FontSize="13"
                         FontWeight="SemiBold"
-                        Foreground="#d1d5db"
+                        Foreground="#1C1A17"
                         Text="{x:Static res:Strings.Add_Featured_NewReleases}" />
                     <ScrollViewer
                         Margin="0,8,0,0"
@@ -274,8 +274,8 @@
             <!-- Game info card -->
             <Border
                 Margin="0,14,0,0"
-                Background="#0DFFFFFF"
-                BorderBrush="#12FFFFFF"
+                Background="#0D2D2A26"
+                BorderBrush="#1E2D2A26"
                 BorderThickness="1"
                 CornerRadius="8"
                 Visibility="{Binding HasDetails, Converter={StaticResource BoolToVis}}">
@@ -295,8 +295,8 @@
                                 Margin="8,0,0,0"
                                 Padding="6,1.5"
                                 VerticalAlignment="Center"
-                                Background="#26a78bfa"
-                                BorderBrush="#40a78bfa"
+                                Background="#262D2A26"
+                                BorderBrush="#402D2A26"
                                 BorderThickness="1"
                                 CornerRadius="4"
                                 Visibility="{Binding Details.IsDlc, Converter={StaticResource BoolToVis}}">
@@ -310,14 +310,14 @@
                         <TextBlock
                             Margin="0,3,0,0"
                             FontSize="11.5"
-                            Foreground="#6b7280">
+                            Foreground="#6B6560">
                             <Run Text="{Binding Details.AppId, Mode=OneWay}" />
                             <Run Text=" · " />
                             <Run Text="{Binding GenresText, Mode=OneWay}" />
                         </TextBlock>
                         <TextBlock
                             FontSize="11"
-                            Foreground="#4b5563"
+                            Foreground="#4A4540"
                             Text="{Binding Details.ReleaseDate, StringFormat={x:Static res:Strings.Add_Released}}"
                             Visibility="{Binding Details.ReleaseDate, Converter={StaticResource NullToCollapsed}}" />
                     </StackPanel>
@@ -339,7 +339,7 @@
                         Text="{x:Static res:Strings.Add_FastFetch}" />
                     <TextBlock
                         FontSize="11"
-                        Foreground="#6b7280"
+                        Foreground="#6B6560"
                         Text="{x:Static res:Strings.Add_FastFetch_Hint}" />
                 </StackPanel>
                 <ui:ToggleSwitch
@@ -440,8 +440,8 @@
                         <Border
                             Margin="0,0,0,8"
                             Padding="12,9"
-                            Background="#08FFFFFF"
-                            BorderBrush="#12FFFFFF"
+                            Background="#082D2A26"
+                            BorderBrush="#1E2D2A26"
                             BorderThickness="1"
                             CornerRadius="8">
                             <StackPanel>
@@ -477,7 +477,7 @@
                                         <Border
                                             Padding="6,2"
                                             Background="#1422c55e"
-                                            BorderBrush="#3022c55e"
+                                            BorderBrush="#302D2A26"
                                             BorderThickness="1"
                                             CornerRadius="4"
                                             Visibility="{Binding StatsText, Converter={StaticResource NullToCollapsed}}">
@@ -604,8 +604,8 @@
                     <Border
                         Margin="0,0,4,0"
                         Padding="0,10"
-                        Background="#08FFFFFF"
-                        BorderBrush="#12FFFFFF"
+                        Background="#082D2A26"
+                        BorderBrush="#1E2D2A26"
                         BorderThickness="1"
                         CornerRadius="8">
                         <StackPanel HorizontalAlignment="Center">
@@ -617,15 +617,15 @@
                                 Text="{Binding DlcInfo.DepotCount}" />
                             <TextBlock
                                 FontSize="11"
-                                Foreground="#6b7280"
+                                Foreground="#6B6560"
                                 Text="{x:Static res:Strings.Add_Depots}" />
                         </StackPanel>
                     </Border>
                     <Border
                         Margin="4,0"
                         Padding="0,10"
-                        Background="#08FFFFFF"
-                        BorderBrush="#12FFFFFF"
+                        Background="#082D2A26"
+                        BorderBrush="#1E2D2A26"
                         BorderThickness="1"
                         CornerRadius="8">
                         <StackPanel HorizontalAlignment="Center">
@@ -637,15 +637,15 @@
                                 Text="{Binding DlcInfo.HaveCount}" />
                             <TextBlock
                                 FontSize="11"
-                                Foreground="#6b7280"
+                                Foreground="#6B6560"
                                 Text="{x:Static res:Strings.Add_Available}" />
                         </StackPanel>
                     </Border>
                     <Border
                         Margin="4,0,0,0"
                         Padding="0,10"
-                        Background="#08FFFFFF"
-                        BorderBrush="#12FFFFFF"
+                        Background="#082D2A26"
+                        BorderBrush="#1E2D2A26"
                         BorderThickness="1"
                         CornerRadius="8">
                         <StackPanel HorizontalAlignment="Center">
@@ -657,7 +657,7 @@
                                 Text="{Binding DlcInfo.MissingCount}" />
                             <TextBlock
                                 FontSize="11"
-                                Foreground="#6b7280"
+                                Foreground="#6B6560"
                                 Text="{x:Static res:Strings.Add_Missing}" />
                         </StackPanel>
                     </Border>
@@ -709,7 +709,7 @@
                                         Grid.Column="1"
                                         Margin="0,0,10,0"
                                         FontSize="11"
-                                        Foreground="#6b7280"
+                                        Foreground="#6B6560"
                                         Text="{Binding Meta}" />
                                     <TextBlock
                                         Grid.Column="2"
@@ -743,7 +743,7 @@
                     Margin="0,8,0,0"
                     HorizontalAlignment="Center"
                     FontSize="11.5"
-                    Foreground="#6b7280"
+                    Foreground="#6B6560"
                     Text="{x:Static res:Strings.Add_DlcHint}"
                     TextAlignment="Center"
                     TextWrapping="Wrap" />
@@ -754,7 +754,7 @@
                 Margin="0,24,0,0"
                 FontSize="13"
                 FontWeight="SemiBold"
-                Foreground="#d1d5db"
+                Foreground="#1C1A17"
                 Text="{x:Static res:Strings.Add_AlreadyHaveFiles}" />
             <views:DropZone Margin="0,8,0,0" DataContext="{Binding Drop}" />
         </StackPanel>
@@ -762,7 +762,7 @@
 
     <!-- Overwrite confirm: dim scrim + centered before/after diff -->
     <Grid
-        Background="#99000000"
+        Background="#802D2A26"
         Visibility="{Binding IsConfirmingOverwrite, Converter={StaticResource BoolToVis}}">
         <Border
             Width="460"
@@ -770,8 +770,8 @@
             Margin="24"
             HorizontalAlignment="Center"
             VerticalAlignment="Center"
-            Background="#1c1c22"
-            BorderBrush="#33FFFFFF"
+            Background="#FFFDF8"
+            BorderBrush="#4D2D2A26"
             BorderThickness="1"
             CornerRadius="12">
             <Grid Margin="20">
@@ -791,7 +791,7 @@
                     Grid.Row="1"
                     Margin="0,4,0,0"
                     FontSize="12"
-                    Foreground="#9ca3af"
+                    Foreground="#4A4540"
                     Text="{x:Static res:Strings.Confirm_ReviewChanges}" />
 
                 <ScrollViewer
@@ -803,7 +803,7 @@
                         <!-- No changes note -->
                         <TextBlock
                             FontSize="12.5"
-                            Foreground="#6b7280"
+                            Foreground="#6B6560"
                             Text="{Binding ConfirmNoChanges}"
                             TextWrapping="Wrap"
                             Visibility="{Binding ConfirmNoChanges, Converter={StaticResource NullToCollapsed}}" />

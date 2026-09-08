@@ -1,4 +1,4 @@
-namespace LuaToolsGui;
+﻿namespace LuaToolsGui;
 
 /// <summary>
 /// Compiled-in client configuration. The Supabase URL and anon key are public
@@ -99,10 +99,7 @@ public static class AppConfig
     /// </summary>
     public static readonly string[] GithubReleasesRepos =
     [
-        "https://github.com/madoiscool/LuaTools",   // primary
-        "https://github.com/mendy-tools/LuaTools",  // backup. Create this repo + re-upload the Velopack
-                                                    // assets ONLY if the primary goes down (404s harmlessly
-                                                    // until then; UpdateService just falls through past it).
+        "https://github.com/jhon1466/GalapaSteam",
     ];
 
     /// <summary>The primary releases repo (first in <see cref="GithubReleasesRepos"/>).</summary>
@@ -112,8 +109,8 @@ public static class AppConfig
     // Separate from the app's own Velopack self-update repo above. Each release of this repo carries
     // `plugin.zip` (the frontend) + `winmm.dll` (the loader); the tag is the version (e.g. "v1.2").
     // Fetched + verified (by asset sha256 digest) through GithubProxy like everything else.
-    public const string PluginReleasesOwner = "madoiscool";
-    public const string PluginReleasesRepo = "LTSP";
+    public const string PluginReleasesOwner = "jhon1466";
+    public const string PluginReleasesRepo = "GalapaSteam";
 
     // ── GitHub proxy mirrors (for blocked/throttled regions, e.g. China) ──────────────
     // github.com / api.github.com are often unreachable in some countries. Any GitHub request is tried

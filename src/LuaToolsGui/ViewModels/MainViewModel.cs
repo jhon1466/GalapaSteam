@@ -2,6 +2,7 @@ using System.Reflection;
 using System.Windows;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using LuaToolsGui.Models;
 using LuaToolsGui.Services;
 
 namespace LuaToolsGui.ViewModels;
@@ -10,9 +11,15 @@ public partial class MainViewModel : ObservableObject
 {
     private readonly AuthService _auth;
     private readonly SteamService _steam;
+    private readonly CacheService _cache;
+    private readonly UnlockerService _unlocker;
+    private readonly PluginInstallerService _installer;
 
     /// <summary>The first-run welcome overlay VM (hosted at the window root, shown via its IsOpen).</summary>
     public OnboardingViewModel Onboarding { get; }
+
+    /// <summary>The license activation overlay VM.</summary>
+    public LicenseViewModel License { get; }
 
     /// <summary>App version shown in the nav pane footer, e.g. "v1.0.1". Read from the assembly.</summary>
     public string VersionLabel { get; } = $"v{ReadVersion()}";
@@ -40,12 +47,32 @@ public partial class MainViewModel : ObservableObject
     [ObservableProperty] private bool _isSigningIn;
     [ObservableProperty] private string? _signInError;
 
-    public MainViewModel(AuthService auth, SteamService steam, OnboardingViewModel onboarding)
+    public MainViewModel(AuthService auth, SteamService steam, OnboardingViewModel onboarding, LicenseViewModel license,
+        CacheService cache, UnlockerService unlocker, PluginInstallerService installer)
     {
         _auth = auth;
         _steam = steam;
         Onboarding = onboarding;
+        License = license;
+        _cache = cache;
+        _unlocker = unlocker;
+        _installer = installer;
         _auth.AuthStateChanged += () => IsGuest = _auth.IsGuest;
+
+        // After license activation, check if onboarding should show
+        License.OnActivated = () =>
+        {
+            if (!_cache.OnboardingComplete)
+            {
+                bool configured =
+                    _unlocker.SelectedMode is (UnlockerMode.Ost or UnlockerMode.Bst)
+                    && _installer.IsInstalledLocally();
+                if (configured)
+                    _cache.OnboardingComplete = true;
+                else
+                    Onboarding.IsOpen = true;
+            }
+        };
     }
 
     public async Task InitializeAsync()

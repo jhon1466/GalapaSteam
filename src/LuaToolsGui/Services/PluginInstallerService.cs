@@ -178,7 +178,7 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
 
     private static string FrontendDir => Path.Combine(
         Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "LuaToolsGui", "plugin");
-    private static string LuatoolsJsPath => Path.Combine(FrontendDir, "public", "luatools.js");
+    private static string GalapaSteamJsPath => Path.Combine(FrontendDir, "public", "galapasteam.js");
     private static string ManifestPath => Path.Combine(FrontendDir, "installed.json");
 
     private string? SteamDir => steam.EffectivePath;
@@ -248,12 +248,12 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
     /// <summary>Fast, network-free check: the plugin frontend + a loader slot are both present. Used by the
     /// first-run onboarding gate (no GitHub round-trip, unlike <see cref="GetStatusAsync"/>).</summary>
     public bool IsInstalledLocally() =>
-        File.Exists(LuatoolsJsPath)
+        File.Exists(GalapaSteamJsPath)
         && (Slots.Any(s => SlotPath(s) is { } p && File.Exists(p)) || LegacyDllPaths.Any(File.Exists));
 
     public async Task<PluginStatus> GetStatusAsync(bool force = false, CancellationToken ct = default)
     {
-        bool frontend = File.Exists(LuatoolsJsPath);
+        bool frontend = File.Exists(GalapaSteamJsPath);
         // "installed" if AT LEAST ONE slot's proxy is present. A partial/mid-migration state still counts
         // as installed and eligible for auto-update, rather than showing "not installed". An OLD loader
         // (psapi/dbghelp) also still counts. Otherwise a user who hasn't migrated shows "not installed"
@@ -347,7 +347,7 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
             Directory.CreateDirectory(FrontendDir);
             ZipFile.ExtractToDirectory(zipPath, FrontendDir);
             NormalizeFrontendLayout();
-            if (!File.Exists(LuatoolsJsPath))
+            if (!File.Exists(GalapaSteamJsPath))
                 return (false, Resources.Strings.Plugin_Err_NoLuatoolsJs);
 
             // Get the frontend live in THIS running process immediately. Don't wait on the Steam restart
@@ -477,8 +477,8 @@ public class PluginInstallerService(SteamService steam, GithubProxy gh, CefInjec
 
     // ── Millennium coexistence: disable its luatools plugin via config (reversible), not folder-rename ──
 
-    private const string MillenniumPluginName = "luatools";
-    private const string MillenniumDisabledName = MillenniumPluginName + ".disabled-by-luatools";
+    private const string MillenniumPluginName = "galapasteam";
+    private const string MillenniumDisabledName = MillenniumPluginName + ".disabled-by-galapasteam";
 
     /// <summary>Options for rewriting Millennium's config. The <see cref="DefaultJsonTypeInfoResolver"/> is
     /// REQUIRED, not cosmetic: re-enabling adds CLR-backed <see cref="JsonValue"/> nodes (from plain strings),

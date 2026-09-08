@@ -72,8 +72,8 @@
             Grid.Row="2"
             Margin="0,10,0,0"
             Padding="14"
-            Background="#0DFFFFFF"
-            BorderBrush="#1FFFFFFF"
+            Background="#0D2D2A26"
+            BorderBrush="#2D2A2633"
             BorderThickness="1"
             CornerRadius="8"
             Visibility="{Binding IsFilterPanelOpen, Converter={StaticResource BoolToVis}}">
@@ -87,27 +87,27 @@
 
                     <WrapPanel Orientation="Horizontal">
                         <StackPanel Margin="0,0,16,8">
-                            <TextBlock FontSize="11" Foreground="#9ca3af" Text="{x:Static res:Strings.Manage_Filter_Type}" />
+                            <TextBlock FontSize="11" Foreground="#4A4540" Text="{x:Static res:Strings.Manage_Filter_Type}" />
                             <ComboBox MinWidth="120" ItemTemplate="{StaticResource FilterOptionTemplate}" ItemsSource="{Binding TypeOptions}" SelectedItem="{Binding SelectedType}" />
                         </StackPanel>
                         <StackPanel Margin="0,0,16,8">
-                            <TextBlock FontSize="11" Foreground="#9ca3af" Text="{x:Static res:Strings.Manage_Filter_Genre}" />
+                            <TextBlock FontSize="11" Foreground="#4A4540" Text="{x:Static res:Strings.Manage_Filter_Genre}" />
                             <ComboBox MinWidth="140" ItemTemplate="{StaticResource FilterOptionTemplate}" ItemsSource="{Binding GenreOptions}" SelectedItem="{Binding SelectedGenre}" />
                         </StackPanel>
                         <StackPanel Margin="0,0,16,8">
-                            <TextBlock FontSize="11" Foreground="#9ca3af" Text="{x:Static res:Strings.Manage_Filter_Year}" />
+                            <TextBlock FontSize="11" Foreground="#4A4540" Text="{x:Static res:Strings.Manage_Filter_Year}" />
                             <ComboBox MinWidth="90" ItemTemplate="{StaticResource FilterOptionTemplate}" ItemsSource="{Binding YearOptions}" SelectedItem="{Binding SelectedYear}" />
                         </StackPanel>
                         <StackPanel Margin="0,0,16,8">
-                            <TextBlock FontSize="11" Foreground="#9ca3af" Text="{x:Static res:Strings.Manage_Filter_Price}" />
+                            <TextBlock FontSize="11" Foreground="#4A4540" Text="{x:Static res:Strings.Manage_Filter_Price}" />
                             <ComboBox MinWidth="90" ItemTemplate="{StaticResource FilterOptionTemplate}" ItemsSource="{Binding PriceOptions}" SelectedItem="{Binding SelectedPrice}" />
                         </StackPanel>
                         <StackPanel Margin="0,0,16,8">
-                            <TextBlock FontSize="11" Foreground="#9ca3af" Text="{x:Static res:Strings.Manage_Filter_Content}" />
+                            <TextBlock FontSize="11" Foreground="#4A4540" Text="{x:Static res:Strings.Manage_Filter_Content}" />
                             <ComboBox MinWidth="120" ItemTemplate="{StaticResource FilterOptionTemplate}" ItemsSource="{Binding ContentOptions}" SelectedItem="{Binding SelectedContent}" />
                         </StackPanel>
                         <StackPanel Margin="0,0,16,8">
-                            <TextBlock FontSize="11" Foreground="#9ca3af" Text="{x:Static res:Strings.Manage_Filter_SortBy}" />
+                            <TextBlock FontSize="11" Foreground="#4A4540" Text="{x:Static res:Strings.Manage_Filter_SortBy}" />
                             <ComboBox MinWidth="150" ItemTemplate="{StaticResource FilterOptionTemplate}" ItemsSource="{Binding SortOptions}" SelectedItem="{Binding SelectedSort}" />
                         </StackPanel>
                     </WrapPanel>
@@ -138,7 +138,7 @@
                         Margin="8,0,0,0"
                         VerticalAlignment="Center"
                         FontSize="11.5"
-                        Foreground="#9ca3af"
+                        Foreground="#4A4540"
                         Text="{Binding FilterPendingText}" />
                 </StackPanel>
             </StackPanel>
@@ -171,8 +171,8 @@
                         Width="248"
                         Height="208"
                         Margin="0,0,12,12"
-                        Background="#0DFFFFFF"
-                        BorderBrush="#14FFFFFF"
+                        Background="#0D2D2A26"
+                        BorderBrush="#1E2D2A26"
                         BorderThickness="1"
                         Cursor="Hand"
                         CornerRadius="10"
@@ -240,7 +240,7 @@
                             <!-- Cover (with a hover delete button) -->
                             <Border
                                 Height="116"
-                                Background="#11FFFFFF"
+                                Background="#112D2A26"
                                 CornerRadius="10,10,0,0"
                                 ClipToBounds="True">
                                 <Grid>
@@ -306,12 +306,12 @@
                                 <TextBlock
                                     Margin="0,4,0,0"
                                     FontSize="11.5"
-                                    Foreground="#6b7280"
+                                    Foreground="#6B6560"
                                     Text="{Binding AppId, StringFormat={x:Static res:Strings.Common_AppId}}" />
                                 <TextBlock
                                     Margin="0,2,0,0"
                                     FontSize="11"
-                                    Foreground="#4b5563"
+                                    Foreground="#4A4540"
                                     Text="{Binding AddedReleaseLabel}"
                                     TextTrimming="CharacterEllipsis" />
                             </StackPanel>
@@ -337,7 +337,7 @@
                 Margin="10,0,0,0"
                 VerticalAlignment="Center"
                 FontSize="13"
-                Foreground="#9ca3af"
+                Foreground="#4A4540"
                 Text="{x:Static res:Strings.Manage_LoadingGames}" />
         </StackPanel>
 
@@ -351,13 +351,13 @@
             <ui:SymbolIcon
                 HorizontalAlignment="Center"
                 FontSize="32"
-                Foreground="#4b5563"
+                Foreground="#4A4540"
                 Symbol="Games24" />
             <TextBlock
                 Margin="0,10,0,0"
                 HorizontalAlignment="Center"
                 FontSize="13"
-                Foreground="#9ca3af"
+                Foreground="#4A4540"
                 Text="{Binding EmptyMessage}"
                 TextAlignment="Center"
                 TextWrapping="Wrap" />
@@ -371,7 +371,7 @@
             HorizontalAlignment="Center"
             VerticalAlignment="Bottom"
             Background="#1f1f27"
-            BorderBrush="#33FFFFFF"
+            BorderBrush="#4D2D2A26"
             BorderThickness="1"
             CornerRadius="12"
             Visibility="{Binding IsSelecting, Converter={StaticResource BoolToVis}}">
@@ -388,7 +388,7 @@
                     VerticalAlignment="Center"
                     FontSize="13"
                     FontWeight="SemiBold"
-                    Foreground="#e5e7eb"
+                    Foreground="#1C1A17"
                     Text="{Binding SelectionLabel}" />
                 <ui:Button
                     Margin="0,0,8,0"
@@ -442,7 +442,7 @@
                                 <TextBlock
                                     Margin="6,0"
                                     VerticalAlignment="Center"
-                                    Foreground="#6b7280"
+                                    Foreground="#6B6560"
                                     Text="…">
                                     <TextBlock.Style>
                                         <Style TargetType="TextBlock">
@@ -507,7 +507,7 @@
                     Margin="0,0,8,0"
                     VerticalAlignment="Center"
                     FontSize="11.5"
-                    Foreground="#9ca3af"
+                    Foreground="#4A4540"
                     Text="{x:Static res:Strings.Manage_ResultsPerPage}" />
                 <ComboBox
                     MinWidth="72"
@@ -529,8 +529,8 @@
             <Border
                 Width="380"
                 HorizontalAlignment="Right"
-                Background="#1c1c22"
-                BorderBrush="#22FFFFFF"
+                Background="#FFFDF8"
+                BorderBrush="#362D2A26"
                 BorderThickness="1,0,0,0">
                 <Grid Margin="20" DataContext="{Binding SelectedTile}">
                     <Grid.RowDefinitions>
@@ -552,7 +552,7 @@
                     <StackPanel Grid.Row="1" Margin="0,4,0,0">
                         <Border
                             Height="170"
-                            Background="#11FFFFFF"
+                            Background="#112D2A26"
                             ClipToBounds="True"
                             CornerRadius="10">
                             <Image Source="{Binding Cover}" Stretch="UniformToFill" />
@@ -580,20 +580,20 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock
                                     FontSize="12"
-                                    Foreground="#9ca3af"
+                                    Foreground="#4A4540"
                                     Text="{Binding AppId, StringFormat={x:Static res:Strings.Common_AppId}}" />
                                 <ui:SymbolIcon
                                     Margin="6,0,0,0"
                                     VerticalAlignment="Center"
                                     FontSize="12"
-                                    Foreground="#6b7280"
+                                    Foreground="#6B6560"
                                     Symbol="Copy24" />
                             </StackPanel>
                         </Button>
                         <TextBlock
                             Margin="0,2,0,0"
                             FontSize="12"
-                            Foreground="#6b7280"
+                            Foreground="#6B6560"
                             Text="{Binding AddedReleaseLabel}" />
                     </StackPanel>
 
@@ -624,12 +624,12 @@
                             <TextBlock
                                 FontSize="13"
                                 FontWeight="SemiBold"
-                                Foreground="#d1d5db"
+                                Foreground="#1C1A17"
                                 Text="{x:Static res:Strings.Manage_AboutHeader}" />
                             <TextBlock
                                 Margin="0,6,0,0"
                                 FontSize="12"
-                                Foreground="#9ca3af"
+                                Foreground="#4A4540"
                                 LineHeight="17"
                                 Text="{Binding ShortDescription}"
                                 TextWrapping="Wrap"
@@ -644,12 +644,12 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBlock
                                     FontSize="11.5"
-                                    Foreground="#6b7280"
+                                    Foreground="#6B6560"
                                     Text="{x:Static res:Strings.Manage_Info_Developer}" />
                                 <TextBlock
                                     Grid.Column="1"
                                     FontSize="11.5"
-                                    Foreground="#d1d5db"
+                                    Foreground="#1C1A17"
                                     Text="{Binding DeveloperLabel}"
                                     TextWrapping="Wrap" />
                             </Grid>
@@ -660,12 +660,12 @@
                                 </Grid.ColumnDefinitions>
                                 <TextBlock
                                     FontSize="11.5"
-                                    Foreground="#6b7280"
+                                    Foreground="#6B6560"
                                     Text="{x:Static res:Strings.Manage_Info_Publisher}" />
                                 <TextBlock
                                     Grid.Column="1"
                                     FontSize="11.5"
-                                    Foreground="#d1d5db"
+                                    Foreground="#1C1A17"
                                     Text="{Binding PublisherLabel}"
                                     TextWrapping="Wrap" />
                             </Grid>
@@ -685,7 +685,7 @@
                                         <Border
                                             Margin="0,0,6,6"
                                             Padding="7,2"
-                                            Background="#2a2440"
+                                            Background="#EDE6DA"
                                             CornerRadius="4">
                                             <TextBlock
                                                 FontSize="10.5"
@@ -705,7 +705,7 @@
                             Margin="0,0,0,8"
                             FontSize="13"
                             FontWeight="SemiBold"
-                            Foreground="#d1d5db"
+                            Foreground="#1C1A17"
                             Text="{x:Static res:Strings.Manage_ActionsHeader}" />
 
                         <!-- Steamless progress (only while running) -->

@@ -77,7 +77,7 @@
                             Text="{Binding DisplayName}" />
                         <TextBlock
                             FontSize="12"
-                            Foreground="#6b7280"
+                            Foreground="#6B6560"
                             Text="{Binding Email}" />
                     </StackPanel>
                         <ui:Button
@@ -92,7 +92,7 @@
                         Margin="0,10,0,0"
                         Padding="12"
                         Background="#1Aeab308"
-                        BorderBrush="#33eab308"
+                        BorderBrush="#332D2A26"
                         BorderThickness="1"
                         CornerRadius="8"
                         Visibility="{Binding ShowBotLinkBanner, Converter={StaticResource BoolToVis}}">
@@ -109,7 +109,7 @@
                                     <TextBlock
                                         Margin="0,2,0,0"
                                         FontSize="12"
-                                        Foreground="#9ca3af"
+                                        Foreground="#4A4540"
                                         Text="{x:Static res:Strings.Settings_BotLink_Body}"
                                         TextWrapping="Wrap" />
                                 </StackPanel>
@@ -155,7 +155,7 @@
                             Margin="0,0,0,10"
                             Padding="12"
                             Background="#1A3b82f6"
-                            BorderBrush="#333b82f6"
+                            BorderBrush="#332D2A26"
                             BorderThickness="1"
                             CornerRadius="8"
                             Visibility="{Binding LoginRequiredMessage, Converter={StaticResource NullToCollapsed}}">
@@ -197,7 +197,7 @@
                                     Text="{x:Static res:Strings.Settings_BrowsingAsGuest}" />
                                 <TextBlock
                                     FontSize="12"
-                                    Foreground="#6b7280"
+                                    Foreground="#6B6560"
                                     Text="{x:Static res:Strings.Settings_GuestHint}" />
                             </StackPanel>
                             <ui:Button
@@ -213,7 +213,7 @@
                         <TextBlock
                             Margin="0,12,0,0"
                             FontSize="12"
-                            Foreground="#9ca3af"
+                            Foreground="#4A4540"
                             Text="{x:Static res:Strings.Settings_BotCode_Hint}" />
                         <StackPanel Margin="0,8,0,0" Orientation="Horizontal">
                             <ui:TextBox
@@ -265,7 +265,7 @@
                                 Icon="{ui:SymbolIcon Dismiss24}" />
                         </Grid>
                         <!-- Usage progress card -->
-                        <Border Margin="0,0,0,10" Padding="12" Background="#08FFFFFF" BorderBrush="#12FFFFFF" BorderThickness="1" CornerRadius="6"
+                        <Border Margin="0,0,0,10" Padding="12" Background="#082D2A26" BorderBrush="#1E2D2A26" BorderThickness="1" CornerRadius="6"
                                 Visibility="{Binding ShowHubcapStats, Converter={StaticResource BoolToVis}}">
                             <StackPanel>
                                 <!-- Real ProgressBar (Fluent-styled, same as PluginView/ModeView/FixesView).
@@ -296,7 +296,7 @@
                         <TextBlock
                             Margin="0,4,0,0"
                             FontSize="12"
-                            Foreground="#6b7280"
+                            Foreground="#6B6560"
                             Text="{x:Static res:Strings.Settings_HubcapKey_Hint}"
                             TextWrapping="Wrap" />
                         <Grid Margin="0,8,0,0">
@@ -329,7 +329,7 @@
                         <TextBlock
                             Margin="0,8,0,0"
                             FontSize="12"
-                            Foreground="#6b7280">
+                            Foreground="#6B6560">
                             <Run Text="{x:Static res:Strings.Settings_HubcapGetKey}" />
                             <Hyperlink Command="{Binding OpenHubcapCommand}" Foreground="#a78bfa">hubcapmanifest.com</Hyperlink>
                         </TextBlock>
@@ -355,7 +355,7 @@
                             <TextBlock
                                 Margin="0,4,0,0"
                                 FontSize="12"
-                                Foreground="#6b7280"
+                                Foreground="#6B6560"
                                 Text="{x:Static res:Strings.Settings_AutoUpdateApps_Hint}"
                                 TextWrapping="Wrap" />
                         </StackPanel>
@@ -380,7 +380,7 @@
                             <TextBlock
                                 Margin="0,4,0,0"
                                 FontSize="12"
-                                Foreground="#6b7280"
+                                Foreground="#6B6560"
                                 Text="{x:Static res:Strings.Add_FastFetch_Hint}"
                                 TextWrapping="Wrap" />
                         </StackPanel>
@@ -411,7 +411,7 @@
                     <TextBlock
                         Margin="0,8,0,0"
                         FontSize="12"
-                        Foreground="#6b7280"
+                        Foreground="#6B6560"
                         Text="{x:Static res:Strings.Settings_Language_Hint}"
                         TextWrapping="Wrap" />
                 </StackPanel>
@@ -456,7 +456,7 @@
                     <TextBlock
                         Margin="0,8,0,0"
                         FontSize="12"
-                        Foreground="#6b7280"
+                        Foreground="#6B6560"
                         Text="{Binding SteamSource}" />
                     <TextBlock
                         Margin="0,6,0,0"
@@ -486,7 +486,7 @@
                             <TextBlock
                                 Margin="0,4,0,0"
                                 FontSize="12"
-                                Foreground="#6b7280"
+                                Foreground="#6B6560"
                                 Text="{x:Static res:Strings.Settings_StartWithWindows_Hint}"
                                 TextWrapping="Wrap" />
                         </StackPanel>
@@ -511,7 +511,7 @@
                             <TextBlock
                                 Margin="0,4,0,0"
                                 FontSize="12"
-                                Foreground="#6b7280"
+                                Foreground="#6B6560"
                                 Text="{x:Static res:Strings.Settings_MinimizeToTray_Hint}"
                                 TextWrapping="Wrap" />
                         </StackPanel>
@@ -540,7 +540,7 @@
                         <TextBlock
                             Margin="0,4,0,0"
                             FontSize="12"
-                            Foreground="#6b7280"
+                            Foreground="#6B6560"
                             Text="{x:Static res:Strings.Settings_DonateKeys_Hint}"
                             TextWrapping="Wrap" />
                     </StackPanel>

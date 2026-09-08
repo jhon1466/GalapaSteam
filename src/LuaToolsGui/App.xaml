@@ -8,9 +8,34 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ui:ThemesDictionary Theme="Dark" />
+                <ui:ThemesDictionary Theme="Light" />
                 <ui:ControlsDictionary />
             </ResourceDictionary.MergedDictionaries>
+
+            <!-- Beige theme overrides -->
+            <Color x:Key="BeigeBackground">#F5F0E8</Color>
+            <Color x:Key="BeigeSurface">#FFFDF8</Color>
+            <Color x:Key="BeigeTextPrimary">#1C1A17</Color>
+            <Color x:Key="BeigeTextSecondary">#4A4540</Color>
+            <Color x:Key="BeigeAccent">#2D2A26</Color>
+
+            <SolidColorBrush x:Key="TextFillColorPrimaryBrush" Color="{StaticResource BeigeTextPrimary}"/>
+            <SolidColorBrush x:Key="TextFillColorSecondaryBrush" Color="{StaticResource BeigeTextSecondary}"/>
+            <SolidColorBrush x:Key="TextFillColorTertiaryBrush" Color="{StaticResource BeigeTextSecondary}"/>
+            <SolidColorBrush x:Key="ControlFillColorDefaultBrush" Color="{StaticResource BeigeSurface}"/>
+            <SolidColorBrush x:Key="CardBackgroundFillColorDefaultBrush" Color="{StaticResource BeigeSurface}"/>
+            <SolidColorBrush x:Key="ApplicationBackgroundBrush" Color="{StaticResource BeigeBackground}"/>
+            <SolidColorBrush x:Key="LayerFillColorDefaultBrush" Color="{StaticResource BeigeSurface}"/>
+            <SolidColorBrush x:Key="LayerFillColorAltBrush" Color="{StaticResource BeigeSurface}"/>
+            <SolidColorBrush x:Key="SmokeFillColorDefaultBrush" Color="#801C1A17"/>
+            <SolidColorBrush x:Key="SolidBackgroundFillColorBaseBrush" Color="{StaticResource BeigeBackground}"/>
+            <SolidColorBrush x:Key="SolidBackgroundFillColorSecondaryBrush" Color="{StaticResource BeigeSurface}"/>
+            <SolidColorBrush x:Key="SolidBackgroundFillColorTertiaryBrush" Color="{StaticResource BeigeSurface}"/>
+            <SolidColorBrush x:Key="SolidBackgroundFillColorQuaternaryBrush" Color="{StaticResource BeigeSurface}"/>
+            <SolidColorBrush x:Key="SystemControlForegroundBaseHighBrush" Color="{StaticResource BeigeTextPrimary}"/>
+            <SolidColorBrush x:Key="SystemControlForegroundBaseMediumBrush" Color="{StaticResource BeigeTextSecondary}"/>
+            <SolidColorBrush x:Key="SystemControlForegroundBaseMediumHighBrush" Color="{StaticResource BeigeTextSecondary}"/>
+            <SolidColorBrush x:Key="SystemControlForegroundBaseMediumLowBrush" Color="{StaticResource BeigeTextSecondary}"/>
 
             <local:InverseBoolToVisibilityConverter x:Key="InverseBoolToVis" />
             <local:NullToCollapsedConverter x:Key="NullToCollapsed" />

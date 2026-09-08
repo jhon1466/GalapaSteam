@@ -8,7 +8,7 @@
     xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
     xmlns:vm="clr-namespace:LuaToolsGui.ViewModels"
     xmlns:views="clr-namespace:LuaToolsGui.Views"
-    Title="LuaTools"
+Title="GalapaSteam"
     Icon="icon.ico"
     Width="1080"
     Height="720"
@@ -27,7 +27,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <ui:TitleBar Grid.Row="0" Title="LuaTools">
+        <ui:TitleBar Grid.Row="0" Title="GalapaSteam">
             <ui:TitleBar.Icon>
                 <ui:ImageIcon Source="pack://application:,,,/icon.ico" />
             </ui:TitleBar.Icon>
@@ -137,13 +137,13 @@
                                 Margin="8,0,0,0"
                                 VerticalAlignment="Center"
                                 FontSize="11.5"
-                                Foreground="#9ca3af"
+                                Foreground="#4A4540"
                                 Text="{x:Static res:Strings.Nav_WaitingForBrowser}" />
                         </StackPanel>
                         <TextBlock
                             Margin="2,8,0,0"
                             FontSize="11.5"
-                            Foreground="#f87171"
+                            Foreground="#c0392b"
                             Text="{Binding SignInError}"
                             TextWrapping="Wrap"
                             Visibility="{Binding SignInError, Converter={StaticResource NullToCollapsed}}" />
@@ -153,7 +153,7 @@
                     <TextBlock
                         Margin="12,0,10,8"
                         FontSize="11"
-                        Foreground="#6b7280"
+                        Foreground="#6B6560"
                         Text="{Binding FooterStatus}"
                         TextTrimming="CharacterEllipsis"
                         ToolTip="{Binding FooterStatus}" />
@@ -169,6 +169,11 @@
                 HorizontalAlignment="Right"
                 VerticalAlignment="Bottom" />
             </Grid>
+
+            <!-- License activation overlay -->
+            <views:LicenseView
+                DataContext="{Binding License}"
+                Visibility="{Binding IsOpen, Converter={StaticResource BoolToVis}}" />
 
             <!-- First-run welcome overlay (last child = top Z-order; covers the nav + page area). -->
             <views:OnboardingView

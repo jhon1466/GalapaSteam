@@ -47,6 +47,7 @@ public partial class App : Application
                 services.AddSingleton<PluginInstallerService>();
                 services.AddTransient<DropInstallViewModel>(); // one per page (Home, Add)
                 services.AddSingleton<AuthService>();
+                services.AddSingleton<LicenseService>();
                 services.AddSingleton<LuaToolsApiClient>();
                 services.AddSingleton<HubcapService>();
                 services.AddSingleton<UpdateService>();
@@ -75,6 +76,7 @@ public partial class App : Application
                 services.AddSingleton<DownloadsViewModel>();
                 services.AddSingleton<PluginViewModel>();
                 services.AddSingleton<OnboardingViewModel>();
+                services.AddSingleton<LicenseViewModel>();
                 services.AddSingleton<MainViewModel>();
                 // Pages resolved by NavigationView via the DI service provider.
                 services.AddSingleton<HomeView>();
@@ -86,6 +88,7 @@ public partial class App : Application
                 services.AddSingleton<FixesView>();
                 services.AddSingleton<PluginView>();
                 services.AddSingleton<SettingsView>();
+                services.AddSingleton<LicenseView>();
                 services.AddSingleton<MainWindow>();
             })
             .Build();
@@ -209,7 +212,7 @@ public partial class App : Application
                     if (!st.DllMatches)
                     {
                         var t = _host.Services.GetRequiredService<ToastService>();
-                        Dispatcher.Invoke(() => t.Show("LuaTools", "Updating plugin. Steam will restart."));
+                        Dispatcher.Invoke(() => t.Show("GalapaSteam", "Updating plugin. Steam will restart."));
                     }
                     await installer.InstallAsync(progress: null);
                 }
@@ -443,22 +446,29 @@ public partial class App : Application
         {
             window.Show();
 
-            // First-run onboarding: show the welcome overlay on a fresh install. Skip it (and mark done)
-            // when the user is already set up (a managed mode selected AND the plugin installed), so
-            // existing users / dev machines aren't nagged. Marking done here is permanent, so switching
-            // mode later never re-triggers onboarding (only ModeMigration ever clears it again).
-            var cache = _host.Services.GetRequiredService<CacheService>();
-            if (!cache.OnboardingComplete)
+            // License activation: show if no valid license is saved. This runs BEFORE
+            // onboarding so the license overlay appears first.
+            var license = _host.Services.GetRequiredService<LicenseViewModel>();
+            if (!license.TryRestore())
             {
-                var unlocker = _host.Services.GetRequiredService<UnlockerService>();
-                var installer = _host.Services.GetRequiredService<PluginInstallerService>();
-                // Custom deliberately doesn't count: a first-run user can't meaningfully choose "I'll
-                // manage it myself" before they've been shown what the options are.
-                bool configured =
-                    unlocker.SelectedMode is (UnlockerMode.Ost or UnlockerMode.Bst)
-                    && installer.IsInstalledLocally();
-                if (configured) cache.OnboardingComplete = true;
-                else main.Onboarding.IsOpen = true;
+                // Show license overlay after a short delay (let the window render first)
+                _ = System.Threading.Tasks.Task.Delay(500).ContinueWith(_ =>
+                    Dispatcher.Invoke(() => license.IsOpen = true));
+            }
+            else
+            {
+                // License is valid — check first-run onboarding
+                var cache = _host.Services.GetRequiredService<CacheService>();
+                if (!cache.OnboardingComplete)
+                {
+                    var unlocker = _host.Services.GetRequiredService<UnlockerService>();
+                    var installer = _host.Services.GetRequiredService<PluginInstallerService>();
+                    bool configured =
+                        unlocker.SelectedMode is (UnlockerMode.Ost or UnlockerMode.Bst)
+                        && installer.IsInstalledLocally();
+                    if (configured) cache.OnboardingComplete = true;
+                    else main.Onboarding.IsOpen = true;
+                }
             }
         }
 

@@ -18,7 +18,8 @@ public class PluginAddService(
     SettingsService settings,
     AuthService auth,
     DownloadQueue queue,
-    ManifestJobFactory jobs)
+    ManifestJobFactory jobs,
+    LicenseService license)
 {
     private const string HubcapSourceName = "Sadie (Morrenus)";
 
@@ -273,6 +274,14 @@ public class PluginAddService(
     private async Task DownloadAsync(long appId, AddState state, SourceRow row)
     {
         if (state.Busy) return;
+
+        // License gate: require valid license and check if this app is allowed
+        if (!license.IsAppAllowed((int)appId))
+        {
+            state.Error = "No tienes una licencia válida para este juego. Adquiere una licencia o actualiza a Premium.";
+            return;
+        }
+
         state.Busy = true;
         state.Error = null;
         state.InstallStatus = null;

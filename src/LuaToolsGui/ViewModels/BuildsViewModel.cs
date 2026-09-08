@@ -190,15 +190,17 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
     private readonly DepotDownloaderService _depotTool;
     private readonly DownloadQueue _queue;
     private readonly ManifestJobFactory _jobs;
+    private readonly LicenseService _license;
 
     public BuildsViewModel(SteamService steam, LuaVault vault, SteamAppListCache appList,
         SteamAppInfoCache appInfo, CoverCache covers, SteamDepotInfo depotInfo, ToastService toast,
         SettingsService settings, DepotDownloaderService depotTool, DownloadQueue queue,
-        ManifestJobFactory jobs)
+        ManifestJobFactory jobs, LicenseService license)
     {
         _depotTool = depotTool;
         _queue = queue;
         _jobs = jobs;
+        _license = license;
         _steam = steam;
         _vault = vault;
         _appList = appList;
@@ -998,7 +1000,7 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
 
         // Seed the destination (and with it the free-space read) before the bar first renders.
         string defaultRoot = Path.Combine(
-            DownloadsFolder(), "LuaTools Depots", game.AppId.ToString());
+            DownloadsFolder(), "GalapaSteam Depots", game.AppId.ToString());
         try { Directory.CreateDirectory(defaultRoot); } catch { /* the Change picker still opens */ }
         DepotOutDir = defaultRoot;
 
@@ -1105,6 +1107,13 @@ public partial class BuildsViewModel : PagedListViewModel<LuaTileViewModel>
     private void ConfirmDepotDownload()
     {
         if (ActiveGame is not { } game) return;
+
+        // License gate: require valid license and check if this app is allowed
+        if (!_license.IsAppAllowed((int)game.AppId))
+        {
+            _toast.Show("Restricción de licencia", "No tienes una licencia válida para este juego. Adquiere una licencia o actualiza a Premium.", error: true);
+            return;
+        }
 
         var selections = DepotPicks
             .Where(p => p is { IsSelected: true, CanDownload: true })

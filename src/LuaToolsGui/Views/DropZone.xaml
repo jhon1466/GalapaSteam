@@ -1,4 +1,4 @@
-<UserControl
+﻿<UserControl
     x:Class="LuaToolsGui.Views.DropZone"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -49,14 +49,14 @@
                     <TextBlock
                         FontSize="13.5"
                         FontWeight="SemiBold"
-                        Foreground="#e5e7eb"
+                        Foreground="#1C1A17"
                         Text="{x:Static res:Strings.Drop_Title}" />
                     <!-- The box also takes a dragged SteamDB / Steam store link (installs that appid)                         a separate line because Drop_Title is already translated into 29 languages and
                          rewording it would leave every one of them describing the old behaviour. -->
                     <TextBlock
                         Margin="0,2,0,0"
                         FontSize="11.5"
-                        Foreground="#9ca3af"
+                        Foreground="#4A4540"
                         Text="{x:Static res:Strings.Drop_LinkHint}" />
 
                     <!-- Alternative to dragging: pick files from a dialog. Reuses the same install path. -->

@@ -185,6 +185,9 @@ public class HttpServerService : IHostedService
                 "/loaded-apps" when req.HttpMethod == "POST" => HandleDismissLoadedApps(),
                 "/api-list" when req.HttpMethod == "GET" => HandleApiList(),
                 "/icon" when req.HttpMethod == "GET" => HandleIcon(),
+                "/check-license" when req.HttpMethod == "POST" => await HandleCheckLicense(req),
+                "/log" when req.HttpMethod == "POST" => HandleLog(req),
+                "/games-database" when req.HttpMethod == "GET" => HandleGamesDatabase(),
                 _ => (404, JsonErr("Not found")),
             };
 
@@ -236,6 +239,11 @@ public class HttpServerService : IHostedService
     /// usage, FastFetch auto-download). Uses services only; the app window is never touched.</summary>
     private async Task<(int, string)> HandleAdd(long appId, HttpListenerRequest req)
     {
+        // License gate
+        var license = _services.GetRequiredService<LicenseService>();
+        if (!license.IsAppAllowed((int)appId))
+            return (200, Json(new { success = false, error = "No tienes una licencia válida para este juego." }));
+
         // The store page passes the game name it already displays, so PluginAddService can skip a
         // lua.tools /details lookup. Best-effort: a missing/blank name just falls back to a fetch.
         string? name = null;
@@ -333,6 +341,11 @@ public class HttpServerService : IHostedService
 
     private async Task<(int, string)> HandleDownload(long appId, HttpListenerRequest req)
     {
+        // License gate
+        var license = _services.GetRequiredService<LicenseService>();
+        if (!license.IsAppAllowed((int)appId))
+            return (200, Json(new { success = false, error = "No tienes una licencia válida para este juego." }));
+
         string body;
         using (var reader = new StreamReader(req.InputStream, req.ContentEncoding))
             body = await reader.ReadToEndAsync();
@@ -594,6 +607,56 @@ public class HttpServerService : IHostedService
         catch
         {
             return (200, Json(new { success = false, dataUrl = "" }));
+        }
+    }
+
+    private static (int, string) HandleLog(HttpListenerRequest req)
+    {
+        try
+        {
+            using var reader = new StreamReader(req.InputStream, req.ContentEncoding);
+            var body = reader.ReadToEnd();
+            PluginLog.Log($"[Plugin] {body}");
+        }
+        catch { }
+        return (200, Json(new { success = true }));
+    }
+
+    private static (int, string) HandleGamesDatabase()
+    {
+        return (200, Json(new { success = true, games = Array.Empty<object>() }));
+    }
+
+    private async Task<(int, string)> HandleCheckLicense(HttpListenerRequest req)
+    {
+        try
+        {
+            using var reader = new StreamReader(req.InputStream, Encoding.UTF8);
+            var body = await reader.ReadToEndAsync();
+            var doc = JsonDocument.Parse(body);
+            var root = doc.RootElement;
+
+            string? key = root.TryGetProperty("key", out var k) ? k.GetString() : null;
+            if (string.IsNullOrEmpty(key))
+                return (200, Json(new { valid = false, error = "No key provided" }));
+
+            var license = _services.GetRequiredService<LicenseService>();
+            var result = await license.ValidateAsync(key);
+            if (result is null)
+                return (200, Json(new { valid = false, error = "Validation failed" }));
+
+            return (200, Json(new
+            {
+                valid = result.Valid,
+                plan = result.Plan,
+                allowedAppIds = result.AllowedAppIds,
+                expiresAt = result.ExpiresAt?.ToString("o"),
+                error = result.Reason,
+            }));
+        }
+        catch (Exception ex)
+        {
+            return (200, Json(new { valid = false, error = ex.Message }));
         }
     }
 

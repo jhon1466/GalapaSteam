@@ -52,6 +52,13 @@ public class AppSettings
     // When true, FastFetch auto-picks the first available source and downloads immediately.
     // Nullable so "never set" (→ default OFF) is distinguishable from an explicit choice.
     public bool? FastFetch { get; set; }
+
+    // ── License ──────────────────────────────────────────────────────
+    public string? LicenseKey { get; set; }
+    public string? LicensePlan { get; set; }
+    public int[]? LicenseAllowedAppIds { get; set; }
+    public string? LicenseExpiresAt { get; set; }
+    public string? LicenseHwid { get; set; }
 }
 
 public class SettingsService
@@ -132,17 +139,17 @@ public class SettingsService
         set { _settings.HubcapApiKey = string.IsNullOrWhiteSpace(value) ? null : value; Save(); }
     }
 
-    /// <summary>When true, the app is registered to launch on Windows sign-in (default OFF).</summary>
+    /// <summary>When true, the app is registered to launch on Windows sign-in (default ON).</summary>
     public bool StartWithWindows
     {
-        get => _settings.StartWithWindows ?? false; // default OFF
+        get => _settings.StartWithWindows ?? true; // default ON
         set { _settings.StartWithWindows = value; Save(); }
     }
 
-    /// <summary>When true, minimizing hides the window to the system tray (default OFF).</summary>
+    /// <summary>When true, minimizing hides the window to the system tray (default ON).</summary>
     public bool MinimizeToTray
     {
-        get => _settings.MinimizeToTray ?? false; // default OFF
+        get => _settings.MinimizeToTray ?? true; // default ON
         set { _settings.MinimizeToTray = value; Save(); }
     }
 
@@ -151,6 +158,47 @@ public class SettingsService
     {
         get => _settings.FastFetch ?? false; // default OFF
         set { _settings.FastFetch = value; Save(); }
+    }
+
+    // ── License persistence ──────────────────────────────────────────
+
+    /// <summary>Save license info locally.</summary>
+    public void SaveLicense(LicenseInfo info)
+    {
+        _settings.LicenseKey = info.Key;
+        _settings.LicensePlan = info.Plan;
+        _settings.LicenseAllowedAppIds = info.AllowedAppIds;
+        _settings.LicenseExpiresAt = info.ExpiresAt?.ToString("o");
+        _settings.LicenseHwid = info.Hwid;
+        Save();
+    }
+
+    /// <summary>Restore saved license, or null if none.</summary>
+    public LicenseInfo? GetLicense()
+    {
+        if (string.IsNullOrEmpty(_settings.LicenseKey) || string.IsNullOrEmpty(_settings.LicensePlan))
+            return null;
+
+        return new LicenseInfo
+        {
+            Key = _settings.LicenseKey ?? "",
+            Valid = true,
+            Plan = _settings.LicensePlan ?? "",
+            AllowedAppIds = _settings.LicenseAllowedAppIds ?? [],
+            ExpiresAt = DateTime.TryParse(_settings.LicenseExpiresAt, out var exp) ? exp : null,
+            Hwid = _settings.LicenseHwid ?? "",
+        };
+    }
+
+    /// <summary>Clear saved license.</summary>
+    public void ClearLicense()
+    {
+        _settings.LicenseKey = null;
+        _settings.LicensePlan = null;
+        _settings.LicenseAllowedAppIds = null;
+        _settings.LicenseExpiresAt = null;
+        _settings.LicenseHwid = null;
+        Save();
     }
 
     private static readonly string TmpPath = FilePath + ".tmp";
@@ -211,7 +259,8 @@ public class SettingsService
             && _settings.HubcapApiKey is null
             && _settings.StartWithWindows is null
             && _settings.MinimizeToTray is null
-            && _settings.FastFetch is null;
+            && _settings.FastFetch is null
+            && _settings.LicenseKey is null;
         if (empty)
         {
             foreach (var p in new[] { FilePath, BakPath, TmpPath })

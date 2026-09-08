@@ -1,4 +1,4 @@
-using System.IO;
+﻿using System.IO;
 using Microsoft.Win32;
 
 namespace LuaToolsGui.Services;
@@ -22,7 +22,7 @@ public static class ProtocolService
 
             using var protoKey = Registry.CurrentUser.CreateSubKey(
                 $@"Software\Classes\{ProtocolName}");
-            protoKey.SetValue("", "URL:LuaTools Protocol");
+            protoKey.SetValue("", "URL:GalapaSteam Protocol");
             protoKey.SetValue("URL Protocol", "");
         }
         catch { }

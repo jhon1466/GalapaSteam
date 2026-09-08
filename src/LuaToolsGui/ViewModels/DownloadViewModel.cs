@@ -89,6 +89,7 @@ public partial class DownloadViewModel : ObservableObject
     private readonly HardwareAppIdService _hardware;
     private readonly DownloadQueue _queue;
     private readonly ManifestJobFactory _jobs;
+    private readonly LicenseService _license;
     private CancellationTokenSource? _searchCts;
     private CancellationTokenSource? _detailsCts;
 
@@ -324,7 +325,7 @@ public partial class DownloadViewModel : ObservableObject
         AuthService auth, ToastService toast, LuaInstaller installer,
         SteamAppListCache appList, SteamAppInfoCache appInfo, SteamDepotInfo depotInfo,
         HardwareAppIdService hardware, DropInstallViewModel drop,
-        DownloadQueue queue, ManifestJobFactory jobs)
+        DownloadQueue queue, ManifestJobFactory jobs, LicenseService license)
     {
         _api = api;
         _hubcap = hubcap;
@@ -338,6 +339,7 @@ public partial class DownloadViewModel : ObservableObject
         _hardware = hardware;
         _queue = queue;
         _jobs = jobs;
+        _license = license;
         Drop = drop;
         _fastFetch = settings.FastFetch;
     }
@@ -669,6 +671,13 @@ public partial class DownloadViewModel : ObservableObject
         // configured can download without signing in. Every other source still needs a lua.tools account.
         bool hubcapWithKey = source.NeedsKey && !string.IsNullOrEmpty(_settings.HubcapApiKey);
         if (!hubcapWithKey && await PromptSignInIfGuestAsync(Resources.Strings.Add_SignIn_Download)) return null;
+
+        // License gate: require valid license and check if this app is allowed by the current plan
+        if (!_license.IsAppAllowed((int)Details.AppId))
+        {
+            _toast.Show("Restricción de licencia", "No tienes una licencia válida para este juego. Adquiere una licencia o actualiza a Premium.", error: true);
+            return null;
+        }
 
         Error = null;
         LastDownload = null;
